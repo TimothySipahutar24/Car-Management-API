@@ -1,0 +1,28 @@
+{
+  "name": "orm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -q bin/www",
+    "db:create": "/node_modules/.bin/sequelize-cli db:create",
+    "db:drop": "/node_modules/.bin/sequelize-cli db:drop",
+    "db:migrate": "/node_modules/.bin/sequelize-cli db:migrate",
+    "db:rollback": "/node_modules/.bin/sequelize-cli db:migrate:undo",
+    "db:seed": "/node_modules/.bin/sequelize-cli db:seed:all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.0",
+    "sequelize-cli": "^6.5.1"
+  }
+}
