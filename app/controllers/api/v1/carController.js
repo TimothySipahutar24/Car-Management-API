@@ -21,24 +21,21 @@ module.exports = {
       });
   },
 
-  create(req, res) {
-    carService
-      .create({
-        title: req.body.title,
-        body: req.body.body,
-      })
-      .then((car) => {
-        res.status(201).json({
-          status: "OK",
-          data: car,
-        });
-      })
-      .catch((err) => {
-        res.status(201).json({
-          status: "FAIL",
-          message: err.message,
-        });
+  async create(req, res) {
+    const body = req.body;
+    try {
+      const car = await carService.create(body);
+
+      res.status(201).json({
+        status: "OK",
+        data: car,
       });
+    } catch (err) {
+      res.status(201).json({
+        status: "FAIL",
+        message: err.message,
+      });
+    }
   },
 
   update(req, res) {

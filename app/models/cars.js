@@ -16,9 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       carName: DataTypes.STRING,
       rent: DataTypes.INTEGER,
       carImage: DataTypes.STRING,
-      // createdBy: DataTypes.STRING,
-      // updatedBy: DataTypes.STRING,
-      // deletedBy: DataTypes.STRING,
     },
     {
       sequelize,

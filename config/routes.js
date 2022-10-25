@@ -11,11 +11,14 @@ const apiRouter = express.Router();
  * TODO: Implement your own API
  *       implementations
  */
-apiRouter.get("/api/v1/cars", controllers.api.v1.car.list);
-apiRouter.post("/api/v1/cars", controllers.api.v1.car.create);
-apiRouter.put("/api/v1/cars/:id", controllers.api.v1.car.update);
-apiRouter.get("/api/v1/cars/:id", controllers.api.v1.car.show);
-apiRouter.delete("/api/v1/cars/:id", controllers.api.v1.car.destroy);
+apiRouter.get("/api/v1/cars", controllers.api.v1.carController.list);
+apiRouter.post("/api/v1/cars", controllers.api.v1.carController.create);
+apiRouter.put("/api/v1/cars/:id", controllers.api.v1.carController.update);
+apiRouter.get("/api/v1/cars/:id", controllers.api.v1.carController.show);
+apiRouter.delete("/api/v1/cars/:id", controllers.api.v1.carController.destroy);
+
+// auth register and login
+apiRouter.post("/api/v1/register", controllers.api.v1.authController.register);
 
 appRouter.use(apiRouter);
 

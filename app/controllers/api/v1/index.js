@@ -1,5 +1,7 @@
-const car = require("./car");
+const carController = require("./carController");
+const authController = require("./authController");
 
 module.exports = {
-  car,
+  carController,
+  authController,
 };

@@ -1,15 +1,24 @@
-const { User } = require("../app/models/user");
+const { Users, UserRoles } = require("../app/models/");
 
 module.exports = {
-  create(body) {
-    return User.create(body);
+  async create(args) {
+    return Users.create(args)
+      .then((user) => {
+        return Users.findByPk(user.id, {
+          include: [UserRoles],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        throw err;
+      });
   },
 
   findUser(condition) {
-    return User.findOne({ where: condition });
+    return Users.findOne({ where: condition });
   },
 
   findUserByPk(id) {
-    return User.findByPk(id);
+    return Users.findByPk(id);
   },
 };
