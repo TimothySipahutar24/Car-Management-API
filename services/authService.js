@@ -55,7 +55,7 @@ module.exports = {
       const body = {
         userName: args.userName,
         email: args.email,
-        password: encryptPassword,
+        password: encryptedPassword,
         role_id: 2,
       };
       const user = await userRepository.create(body);
@@ -85,7 +85,7 @@ module.exports = {
         return false;
       }
 
-      //generate token here
+      // generate token here
       const token = createToken({
         id: user.id,
         email: user.email,

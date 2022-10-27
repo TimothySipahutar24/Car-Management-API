@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Car Management API",
+    "description": "Chapter 6 Challenge from Fullstack Web Binar Academy",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "All About Users"
+    },
+    {
+      "name": "Cars",
+      "description": "All About Cars"
+    }
+  ],
+  "paths": {
+    "/api/v1/login": {
+      "post": {
+        "summary": "Users Login Endpoint",
+        "description": "Login for Every Type of Users",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "superadmin@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "superadmin123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "auth": {
+                      "type": "object",
+                      "properties": {
+                        "userName": {
+                          "type": "string",
+                          "example": "superadmin"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "superadmin@mail.com"
+                        },
+                        "role_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "$2a$10$Q6hVIEU5Y"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2022-10-23 09:58:28.565+07"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2022-10-23 09:58:28.565+07"
+                        },
+                        "token": {
+                          "type": "string",
+                          "example": "xxxxxx"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Failed to Login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email or password is incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
