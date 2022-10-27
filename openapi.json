@@ -61,6 +61,10 @@
                     "auth": {
                       "type": "object",
                       "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
                         "userName": {
                           "type": "string",
                           "example": "superadmin"
@@ -137,6 +141,738 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/register": {
+      "post": {
+        "summary": "Create a member account",
+        "description": "Registration for member",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "membertest@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "member123"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Success creating a member account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "OK"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "userName": {
+                        "type": "string",
+                        "example": "membername"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "membertest@mail.com"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "member123"
+                      },
+                      "role_id": {
+                        "type": "integer",
+                        "example": 3
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2022-10-20T14:27:32.828Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2022-10-20T14:27:32.828Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Failed to create a member account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "FAIL"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Unprocessable entity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/register-as-admin": {
+      "post": {
+        "summary": "Create an admin account",
+        "description": "Registration for admin",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "admintest@mail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "admin123"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "Success creating an admin ccount",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "OK"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "userName": {
+                        "type": "string",
+                        "example": "adminname"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "admintest@mail.com"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "admin123"
+                      },
+                      "role_id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2022-10-20T14:27:32.828Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2022-10-20T14:27:32.828Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "422": {
+          "description": "Failed to create an admin account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "FAIL"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Unprocessable entity"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Failed to create an admin account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "FAIL"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "You're not authorize since only super admin can register an admin!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ]
+    },
+    "/api/v1/cars": {
+      "post": {
+        "summary": "Create car",
+        "description": "add car in the form of JSON",
+        "tags": ["Cars"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "carName": {
+                    "type": "string",
+                    "example": "avanza"
+                  },
+                  "rent": {
+                    "type": "integer",
+                    "example": 200000
+                  },
+                  "carImage": {
+                    "type": "string",
+                    "example": "avanza.png"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2022-10-20T14:27:32.828Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2022-10-20T14:27:32.828Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Car successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "carName": {
+                            "type": "string",
+                            "example": "avanza"
+                          },
+                          "rent": {
+                            "type": "integer",
+                            "example": 200000
+                          },
+                          "carImage": {
+                            "type": "string",
+                            "example": "avanza.png"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2022-10-20T14:27:32.828Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2022-10-20T14:27:32.828Z"
+                          },
+                          "deletedAt": {
+                            "type": "string",
+                            "example": "2022-10-20T14:27:32.828Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Failed to create a car",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unprocessable entity"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized user prohibited to create car",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This user doesn't has access to create car data"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "Return a list of all cars",
+        "description": "List cars that has been made",
+        "tags": ["Cars"],
+        "responses": {
+          "200": {
+            "description": "JSON array of cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "carName": {
+                            "type": "string",
+                            "example": "avanza"
+                          },
+                          "rent": {
+                            "type": "integer",
+                            "example": 200000
+                          },
+                          "carImage": {
+                            "type": "string",
+                            "example": "avanza.png"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "example": "2022-10-20T14:27:32.828Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "example": "2022-10-20T14:27:32.828Z"
+                          },
+                          "deletedAt": {
+                            "type": "string",
+                            "example": "2022-10-20T14:27:32.828Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Cannot process the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cars/{id}": {
+      "get": {
+        "summary": "Return car data by ID",
+        "description": "Retrieve car data in the form of JSON with ID as parameter",
+        "tags": ["Cars"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Object cars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": 1
+                    },
+                    "carName": {
+                      "type": "string",
+                      "example": "avanza"
+                    },
+                    "rent": {
+                      "type": "integer",
+                      "example": 200000
+                    },
+                    "carImage": {
+                      "type": "string",
+                      "example": "avanza.png"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2022-10-20T14:27:32.828Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2022-10-20T14:27:32.828Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized user prohibited to view car",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This user doesn't has access to see specific car data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object cars not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      },
+      "put": {
+        "summary": "Update car by ID",
+        "description": "Update car data with car ID to find car data then update data",
+        "tags": ["Cars"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Object cars",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "carName": {
+                    "type": "string",
+                    "example": "avanza"
+                  },
+                  "rent": {
+                    "type": "integer",
+                    "example": 200000
+                  },
+                  "carImage": {
+                    "type": "string",
+                    "example": "avanza.png"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2022-10-20T14:27:32.828Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2022-10-20T14:27:32.828Z"
+                  },
+                  "deletedAt": {
+                    "type": "string",
+                    "example": "2022-10-20T14:27:32.828Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Data has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized user prohibited to edit car",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This user doesn't has access to update car data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Unprocessable entity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete car by ID",
+        "description": "Delete car data based on the request ID to find car data and then delete data",
+        "tags": ["Cars"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Car ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Success deleting cars"
+                    },
+                    "data": {
+                      "type": "integer",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized user prohibited to edit car",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This user doesn't has access to delete car data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Failed to delete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unprocessable entity"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

@@ -31,7 +31,7 @@ module.exports = {
         data: car,
       });
     } catch (err) {
-      res.status(201).json({
+      res.status(422).json({
         status: "FAIL",
         message: err.message,
       });
@@ -65,7 +65,7 @@ module.exports = {
         });
       })
       .catch((err) => {
-        res.status(201).json({
+        res.status(404).json({
           status: "FAIL",
           message: err.message,
         });
